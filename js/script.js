@@ -8,10 +8,13 @@ document.querySelectorAll('.item[data-img]').forEach(card => {
 });
 
 // Animazioni on scroll (IntersectionObserver)
+const animatedEls = document.querySelectorAll('.item, .section-divider');
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const el = entry.target;
+      if (el.classList.contains('visible')) return;
       if (el.classList.contains('item')) {
         const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('item') && !c.classList.contains('hidden-by-filter'));
         const idx = siblings.indexOf(el) % 2;
@@ -19,12 +22,11 @@ const observer = new IntersectionObserver((entries) => {
       } else {
         el.classList.add('visible');
       }
-      observer.unobserve(el);
     }
   });
 }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-document.querySelectorAll('.item, .section-divider').forEach(el => observer.observe(el));
+animatedEls.forEach(el => observer.observe(el));
 
 // Filtri gin — pill group
 const filterBar = document.getElementById('gin-filters');
@@ -41,11 +43,14 @@ if (filterBar) {
 
     const filter = btn.dataset.filter;
     items.forEach(item => {
+      const wasHidden = item.classList.contains('hidden-by-filter');
       const show = filter === 'tutti' || item.dataset.category === filter;
       if (show) {
         item.classList.remove('hidden-by-filter');
-        item.classList.add('filter-enter');
-        setTimeout(() => item.classList.remove('filter-enter'), 400);
+        if (wasHidden) {
+          item.classList.add('filter-enter');
+          setTimeout(() => item.classList.remove('filter-enter'), 400);
+        }
       } else {
         item.classList.add('hidden-by-filter');
       }
@@ -67,6 +72,7 @@ if (backBtn) {
     }
   }, { passive: true });
   backBtn.addEventListener('click', () => {
+    animatedEls.forEach(el => el.classList.remove('visible'));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
