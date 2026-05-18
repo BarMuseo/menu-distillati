@@ -7,291 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #faf6f0;
-    --bg-soft: #f3ece1;
-    --card: #ffffff;
-    --border: #e8ddcc;
-    --text: #2a2018;
-    --muted: #7a6b5c;
-    --accent: #a13c33;
-    --accent-dark: #7a2c25;
-    --accent-soft: #c4554a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
-    min-height: 100vh;
-    background-image:
-      radial-gradient(ellipse at top, rgba(161, 60, 51, 0.04) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom, rgba(161, 60, 51, 0.03) 0%, transparent 50%);
-  }
-
-  header {
-    text-align: center;
-    padding: 3rem 1.5rem 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  header .logo {
-    max-width: 280px;
-    width: 60%;
-    height: auto;
-    margin-bottom: 1.5rem;
-  }
-
-  header .eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.75rem;
-  }
-
-  header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: 0.02em;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-    color: var(--text);
-  }
-
-  header h1 em { font-style: italic; color: var(--accent); }
-
-  header .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--muted);
-    font-size: 1.05rem;
-  }
-
-  nav.categories {
-    position: sticky;
-    top: 0;
-    background: rgba(250, 246, 240, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
-    padding: 1rem;
-    z-index: 100;
-  }
-
-  nav.categories ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.75rem;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  nav.categories a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    font-weight: 500;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    padding: 0.25rem 0;
-    border-bottom: 1px solid transparent;
-  }
-
-  nav.categories a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-
-  .section-divider {
-    max-width: 1200px;
-    margin: 2rem auto 0;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-
-  .section-divider .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
-  }
-
-  .section-divider .ornament-mark {
-    width: 10px;
-    height: 10px;
-    transform: rotate(45deg);
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  .category {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 2rem;
-  }
-
-  .category-title { text-align: center; margin-bottom: 3rem; }
-
-  .category-title .ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .category-title .ornament::before,
-  .category-title .ornament::after {
-    content: '';
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  }
-
-  .category-title .ornament span {
-    color: var(--accent);
-    font-size: 0.7rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .category-title h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--text);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 500px) { .grid { grid-template-columns: 1fr; gap: 1.25rem; } }
-
-  .item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .item:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent-soft);
-    box-shadow: 0 10px 30px rgba(161, 60, 51, 0.08);
-  }
-
-  .item .image {
-    aspect-ratio: 1 / 1;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-    padding: 0.75rem;
-  }
-
-  /* Immagine: nascosta finché non viene trovata l'estensione corretta.
-     object-fit: contain mostra l'intera bottiglia senza ritagli. */
-  .item .image img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: none;
-  }
-
-  .item .image img.loaded { display: block; }
-
-  .item .image .placeholder {
-    color: var(--accent-soft);
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 1rem;
-    opacity: 0.6;
-  }
-
-  .item .image img.loaded + .placeholder { display: none; }
-
-  .item .content {
-    padding: 1.25rem 1rem 1.5rem;
-    text-align: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-soft);
-  }
-
-  .item h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    font-size: 1.3rem;
-    letter-spacing: 0.02em;
-    margin-bottom: 0.5rem;
-    color: var(--accent);
-  }
-
-  .item .origin {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.75rem;
-  }
-
-  .item .description {
-    font-size: 0.85rem;
-    color: var(--text);
-    line-height: 1.55;
-    font-weight: 300;
-    flex: 1;
-  }
-
-  footer {
-    text-align: center;
-    padding: 3rem 1.5rem;
-    border-top: 1px solid var(--border);
-    margin-top: 3rem;
-    color: var(--muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  footer .mark {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    text-transform: none;
-    letter-spacing: 0;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
-  }
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -319,288 +35,21 @@
     <h2>Gin</h2>
   </div>
 
-  <div class="grid">
+  <div class="sub-filters" id="gin-filters">
+    <div class="slider"></div>
+    <button class="active" data-filter="tutti">Tutti</button>
+    <button data-filter="secco">Secco</button>
+    <button data-filter="agrumato">Agrumato</button>
+    <button data-filter="morbido">Morbido</button>
+    <button data-filter="speziato">Speziato</button>
+    <button data-filter="floreale">Floreale</button>
+    <button data-filter="erbaceo">Erbaceo</button>
+  </div>
 
-    <article class="item" data-img="immagini/gin/roku">
-      <div class="image"><img alt="Roku Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Roku</h3>
-        <div class="origin">Giappone · 43%</div>
-        <p class="description">Gin artigianale di Suntory che unisce otto botaniche tradizionali a sei giapponesi: fiore e foglia di sakura, tè sencha e gyokuro, scorza di yuzu e pepe sansho. Profilo floreale, agrumato e armonico, con un finale leggermente piccante.</p>
-      </div>
-    </article>
+  <div class="grid" id="gin-grid">
 
-    <article class="item" data-img="immagini/gin/etsu">
-      <div class="image"><img alt="Etsu Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Etsu</h3>
-        <div class="origin">Giappone · 43%</div>
-        <p class="description">Distillato a Hokkaido nella distilleria Asahikawa con acqua delle montagne Taisetsu. Botaniche di ginepro, yuzu, scorza d'arancia amara, tè, coriandolo, angelica e liquirizia. Sorso pulito, fresco, dalle eleganti note agrumate e floreali.</p>
-      </div>
-    </article>
 
-    <article class="item" data-img="immagini/gin/tenjaku">
-      <div class="image"><img alt="Tenjaku Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Tenjaku</h3>
-        <div class="origin">Giappone · 40%</div>
-        <p class="description">Craft gin prodotto a Fuefuki, ai piedi del monte Fuji. Combina oltre dieci botaniche occidentali con yuzu, pepe sansho, tè verde ed estratto di pesca della regione di Yamanashi. Aromatico, fresco ed equilibrato, ideale in miscelazione.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/bombay">
-      <div class="image"><img alt="Bombay Original Dry"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Bombay Original Dry</h3>
-        <div class="origin">Inghilterra · 37,5%</div>
-        <p class="description">Classico London Dry Gin distillato con otto botaniche selezionate: ginepro, coriandolo, scorza di limone, liquirizia, angelica, iris, mandorla e cassia. Profilo pulito, secco e tradizionale, perfetto per cocktail classici.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/bombay_sapphire">
-      <div class="image"><img alt="Bombay Sapphire"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Bombay Sapphire</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">Iconico London Dry dalla bottiglia azzurra, distillato con dieci botaniche tramite il metodo Vapour Infusion: ginepro, coriandolo, scorza di limone, liquirizia, mandorla, iris, angelica, cassia, cubebe e grani del paradiso. Floreale, fresco ed elegante.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/plymouth">
-      <div class="image"><img alt="Plymouth Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Plymouth</h3>
-        <div class="origin">Inghilterra · 41,2%</div>
-        <p class="description">Storico gin inglese prodotto dal 1793 nella Black Friars Distillery di Plymouth. Sette botaniche, tra cui radice di iris, angelica, coriandolo e cardamomo verde. Stile leggermente più morbido e terroso del London Dry, con corpo pieno e finale rotondo.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/tanqueray">
-      <div class="image"><img alt="Tanqueray London Dry"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Tanqueray</h3>
-        <div class="origin">Scozia · 43,1%</div>
-        <p class="description">London Dry Gin di riferimento, distillato quattro volte secondo una ricetta del 1830. Solo quattro botaniche: ginepro, coriandolo, angelica e liquirizia. Profilo netto, secco, dominato dal ginepro: il classico tra i classici.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/tanqueray_ten">
-      <div class="image"><img alt="Tanqueray No. Ten"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Tanqueray N° Ten</h3>
-        <div class="origin">Scozia · 47,3%</div>
-        <p class="description">Versione premium di Tanqueray, distillata nel piccolo alambicco "Tiny Ten" con agrumi freschi: pompelmo, lime, arancia e fiori di camomilla. Vivace, agrumato e setoso, considerato uno dei migliori gin per il Martini.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/n_3">
-      <div class="image"><img alt="N° 3 London Dry Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>N° 3 London Dry</h3>
-        <div class="origin">Paesi Bassi · 46%</div>
-        <p class="description">Distillato in Olanda per la storica casa londinese Berry Bros. & Rudd. Sole sei botaniche di altissima qualità: ginepro, coriandolo, angelica, scorza di arancia, pompelmo e cardamomo. Pulito, deciso, costruito attorno al ginepro: gin da Martini per eccellenza.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/hendricks">
-      <div class="image"><img alt="Hendrick's Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Hendrick's</h3>
-        <div class="origin">Scozia · 41,4%</div>
-        <p class="description">Gin scozzese distillato con undici botaniche e arricchito da infusioni post-distillazione di petali di rosa bulgara e cetriolo. Profilo floreale, delicato e inconfondibile, da servire idealmente con una fettina di cetriolo.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/farmers_botanical">
-      <div class="image"><img alt="Farmer's Botanical Organic"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Farmer's Botanical</h3>
-        <div class="origin">Stati Uniti · 46,7%</div>
-        <p class="description">Small batch gin biologico certificato USDA, prodotto in Idaho da grano coltivato sostenibilmente. Botaniche organiche di ginepro, fiori di sambuco, citronella, coriandolo e radice di angelica. Floreale, fresco e morbido.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/london_n_1">
-      <div class="image"><img alt="The London N° 1 Original Blue Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>The London N° 1</h3>
-        <div class="origin">Inghilterra · 47%</div>
-        <p class="description">Original Blue Gin dal caratteristico colore turchese, ottenuto naturalmente dall'infusione di gardenia. Dodici botaniche tra cui ginepro, coriandolo, angelica, liquirizia, scorza di agrumi, mandorla, cassia e iris. Elegante, complesso e leggermente dolce.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/gin_mg">
-      <div class="image"><img alt="Gin Mazzetti"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Gin MG</h3>
-        <div class="origin">Spagna · 40%</div>
-        <p class="description">Storico London Dry Gin spagnolo lanciato nel 1940 dalla famiglia Giró Ribot a Vilanova i la Geltrú, vicino a Barcellona. Tra i gin più venduti in Spagna, viene prodotto per doppia distillazione in alambicchi disegnati nel 1942 da Manuel Giró Carlos. Le bacche di ginepro selvatico provengono dalla tenuta di proprietà a Teruel. Profilo elegante e classico con note di ginepro, erba fresca, balsamico e leggero limone.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/gin_mare">
-      <div class="image"><img alt="Gin Mare"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Gin Mare</h3>
-        <div class="origin">Spagna · 42,7%</div>
-        <p class="description">Mediterranean gin distillato in Catalogna con botaniche tipiche della macchia mediterranea: oliva arbequina, rosmarino, timo, basilico, cardamomo, coriandolo e agrumi. Erbaceo, salino e marcatamente mediterraneo.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/fifty_pounds">
-      <div class="image"><img alt="Fifty Pounds Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Fifty Pounds</h3>
-        <div class="origin">Inghilterra · 43,5%</div>
-        <p class="description">London Dry Gin ispirato al 1736, anno della famosa tassa sui distillati di 50 sterline. Undici botaniche distillate in piccoli batch e affinate per tre settimane prima dell'imbottigliamento. Equilibrato, classico, dal profilo morbido e raffinato.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/bulldog">
-      <div class="image"><img alt="Bulldog Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Bulldog</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">London Dry Gin contemporaneo a quadrupla distillazione, con dodici botaniche da otto Paesi. Tra le più caratteristiche: occhio di drago (longan), foglie di loto, lavanda, papavero bianco, citronella e mandorla. Morbido, lievemente speziato e versatile.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/opihr">
-      <div class="image"><img alt="Opihr Oriental Spiced Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Opihr</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">Oriental Spiced Gin ispirato alle antiche vie delle spezie. Botaniche provenienti da tutto il mondo: pepe nero di Tellicherry, cumino indiano, cardamomo, coriandolo marocchino, semi di pompelmo e zenzero. Speziato, esotico e avvolgente.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/dodds">
-      <div class="image"><img alt="Dodd's Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Dodd's</h3>
-        <div class="origin">Inghilterra · 49,9%</div>
-        <p class="description">Gin biologico della London Distillery Company, prodotto in piccoli batch a Battersea. Otto botaniche organiche: ginepro, angelica, scorza fresca di lime, cardamomo verde e nero, alloro, foglie di lampone e miele della London Honey Company. Strutturato e raffinato.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/gunpowder">
-      <div class="image"><img alt="Drumshanbo Gunpowder Irish Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Gunpowder</h3>
-        <div class="origin">Irlanda · 43%</div>
-        <p class="description">Drumshanbo Gunpowder Irish Gin distillato lentamente in piccoli alambicchi nella contea di Leitrim. Caratterizzato dal tè verde Gunpowder cinese, unito a coriandolo, cardamomo, agrumi orientali (yuzu, limone Meyer, pompelmo) e bacche di sorbo. Fresco, speziato ed agrumato.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/gunpowder_sardinian">
-      <div class="image"><img alt="Gunpowder Sardinian Citrus"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Gunpowder Sardinian Citrus</h3>
-        <div class="origin">Irlanda · 43%</div>
-        <p class="description">Espressione speciale di Gunpowder con l'aggiunta di agrumi sardi: arancia, limone e pompelmo della Sardegna. Mantiene il cuore di tè Gunpowder e ginepro, con un'esplosione agrumata mediterranea pulita e intensa.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/citadelle">
-      <div class="image"><img alt="Citadelle Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Citadelle</h3>
-        <div class="origin">Francia · 44%</div>
-        <p class="description">Storico gin francese della Maison Ferrand, distillato in alambicchi Charentais a fiamma viva. Diciannove botaniche da diciassette Paesi: ginepro, coriandolo, cardamomo, fiori di violetta, anice stellato, fave di tonka e altre. Complesso, floreale e finemente speziato.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/apium">
-      <div class="image"><img alt="Apium London Dry Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Apium</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">London Dry distillato in Inghilterra con un profilo aromatico distintivo. Botaniche di ginepro, fiori di lavanda, pepe di cubeba, rosmarino, angelica, verbena e coriandolo. Delicato e morbido, con un caratteristico finale floreale di lavanda.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/apium_grapefruit">
-      <div class="image"><img alt="Apium Grapefruit Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Apium Grapefruit</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">Espressione agrumata di Apium, in cui il pompelmo è protagonista accanto a ginepro ed erbe aromatiche. Al naso fresco e vivace, al palato esplosione agrumata bilanciata da delicate note erbacee. Finale secco e rinfrescante.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/theresianer">
-      <div class="image"><img alt="Theresianer Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Theresianer</h3>
-        <div class="origin">Italia · 40%</div>
-        <p class="description">Gin italiano della storica birreria Theresianer, dove tradizione brassicola incontra distillazione. Connubio originale di luppolo, agrumi (pompelmo, mandarino) e cardamomo, con ginepro distillato separatamente. Profilo speziato, resinoso e fresco.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/bathtub">
-      <div class="image"><img alt="Bathtub Gin Ableforth's"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Bathtub Gin</h3>
-        <div class="origin">Inghilterra · 43,3%</div>
-        <p class="description">Gin artigianale di Ableforth's prodotto con il metodo della cold compound infusion. Sei botaniche selezionate: ginepro, scorza d'arancia, coriandolo, cassia, cardamomo e chiodi di garofano. Profilo intenso e morbido, dal caratteristico colore paglierino.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/martin_millers">
-      <div class="image"><img alt="Martin Miller's Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Martin Miller's</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">London Dry distillato in Inghilterra ma tagliato con acqua glaciale islandese, considerata tra le più pure al mondo. Dieci botaniche tra cui ginepro toscano, coriandolo, cassia, scorza di agrumi e cetriolo. Pulito, morbido ed equilibrato.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/brooklyn">
-      <div class="image"><img alt="Brooklyn Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Brooklyn</h3>
-        <div class="origin">Stati Uniti · 40%</div>
-        <p class="description">Craft gin americano prodotto in piccoli lotti con agrumi freschi (non essiccati) pelati a mano. Undici botaniche tra cui ginepro, scorze di limone, lime e arancia, semi di cacao, fiori di lavanda e foglie di menta. Fresco, vibrante e contemporaneo.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/giniu">
-      <div class="image"><img alt="Giniu Gin Silvio Carta"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Giniu</h3>
-        <div class="origin">Italia · Sardegna · 40%</div>
-        <p class="description">Gin sardo della distilleria Silvio Carta, prodotto in Oristano. Ottenuto da galbuli di ginepro sardo e botaniche della macchia mediterranea. Velluto, equilibrato, con note salmastre e iodate che richiamano direttamente il mare e la terra sarda.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/osmoz">
-      <div class="image"><img alt="Osmoz Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Osmoz</h3>
-        <div class="origin">Francia · 40%</div>
-        <p class="description">Gin francese firmato Maison Villevert (gli stessi di Citadelle), pensato per la mixology contemporanea. Bilanciato e leggermente floreale, con note agrumate e di ginepro elegante. Profilo morbido e versatile, ideale come base per cocktail.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/portofino">
-      <div class="image"><img alt="Portofino Dry Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Portofino Dry Gin</h3>
-        <div class="origin">Italia · Liguria · 43%</div>
-        <p class="description">Gin ispirato alle estati mediterranee della Riviera Ligure. Botaniche fresche coltivate localmente: ginepro, scorze di limone e mandarino, lavanda, rosmarino, menta, salvia, maggiorana e fiori di camomilla. Elegante, floreale e marcatamente mediterraneo.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/the_illusionist">
-      <div class="image"><img alt="The Illusionist Dry Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>The Illusionist</h3>
-        <div class="origin">Germania · 45%</div>
-        <p class="description">Gin tedesco famoso per il suo straordinario colore blu indaco che cambia tonalità a contatto con la tonica (acidità). Distillato con quattordici botaniche, tra cui ginepro, lavanda, fiori di clitoria ternatea (responsabili del colore), agrumi e spezie.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/cande_gin">
+    <article class="item" data-img="immagini/gin/cande_gin" data-category="speziato">
       <div class="image"><img alt="CandeGIN"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>Cande Gin</h3>
@@ -609,61 +58,8 @@
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/malfy">
-      <div class="image"><img alt="Malfy Gin Originale"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Malfy Originale</h3>
-        <div class="origin">Italia · 41%</div>
-        <p class="description">Italian Gin della distilleria Torino Distillati, prodotto a Moncalieri. Sei botaniche con un'enfasi mediterranea: ginepro italiano, coriandolo, angelica, iris, cassia e scorze di limone della Costiera Amalfitana. Pulito, agrumato e versatile.</p>
-      </div>
-    </article>
 
-    <article class="item" data-img="immagini/gin/malfy_pompelmo">
-      <div class="image"><img alt="Malfy con Pompelmo"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Malfy con Pompelmo</h3>
-        <div class="origin">Italia · 41%</div>
-        <p class="description">Versione di Malfy con pompelmo rosa siciliano in primo piano. Profilo agrumato vivace e leggermente amaricante, bilanciato dal ginepro toscano. Perfetto per Gin Tonic estivi e cocktail freschi.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/malfy_limone">
-      <div class="image"><img alt="Malfy con Limone"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Malfy con Limone</h3>
-        <div class="origin">Italia · 41%</div>
-        <p class="description">Espressione di Malfy con limoni Sfusato della Costiera Amalfitana, raccolti a mano. Profumo intenso e fresco di scorza di limone, ginepro e coriandolo. Vivace, solare, mediterraneo nel cuore.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/nordes">
-      <div class="image"><img alt="Nordés Atlantic Galician Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Nordés</h3>
-        <div class="origin">Spagna · Galizia · 40%</div>
-        <p class="description">Atlantic Galician Gin con base di acquavite di uva Albariño. Undici botaniche, di cui sei autoctone della Galizia: salicornia, alga marina, eucalipto, menta, salvia e tè di Hierba Luisa. Floreale, salino e atlantico.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/elephant">
-      <div class="image"><img alt="Elephant Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Elephant</h3>
-        <div class="origin">Germania · 45%</div>
-        <p class="description">Premium gin tedesco con botaniche rare africane: baobab, buchu, devil's claw, lion's tail e mela africana, unite a ginepro e agrumi. Il 15% dei profitti devoluto alla conservazione degli elefanti. Profilo erbaceo, terroso e ricco.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/cubical">
-      <div class="image"><img alt="Cubical Premium Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Cubical</h3>
-        <div class="origin">Spagna · 40%</div>
-        <p class="description">Gin spagnolo della distilleria Williams & Humbert, distillato a Jerez. Riconoscibile per la bottiglia cubica. Botaniche tradizionali con un equilibrio classico tra ginepro, coriandolo e agrumi. Pulito, secco e versatile.</p>
-      </div>
-    </article>
-
-    <article class="item" data-img="immagini/gin/engine">
+    <article class="item" data-img="immagini/gin/engine" data-category="floreale">
       <div class="image"><img alt="Engine Pure Organic Gin"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>Engine</h3>
@@ -672,25 +68,18 @@
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/portobello_road">
-      <div class="image"><img alt="Portobello Road Gin"><div class="placeholder">Immagine</div></div>
+
+    <article class="item" data-img="immagini/gin/giniu" data-category="morbido">
+      <div class="image"><img alt="Giniu Gin Silvio Carta"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Portobello Road</h3>
-        <div class="origin">Inghilterra · 42%</div>
-        <p class="description">London Dry Gin distillato a Notting Hill, nel cuore di Londra. Nove botaniche classiche: ginepro, scorze di limone e arancia amara, coriandolo, angelica, iris, liquirizia, noce moscata e cassia. Equilibrato, leggero e dal carattere britannico autentico.</p>
+        <h3>Giniu</h3>
+        <div class="origin">Italia · Sardegna · 40%</div>
+        <p class="description">Gin sardo della distilleria Silvio Carta, prodotto in Oristano. Ottenuto da galbuli di ginepro sardo e botaniche della macchia mediterranea. Velluto, equilibrato, con note salmastre e iodate che richiamano direttamente il mare e la terra sarda.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/brockmans">
-      <div class="image"><img alt="Brockmans Gin"><div class="placeholder">Immagine</div></div>
-      <div class="content">
-        <h3>Brockmans</h3>
-        <div class="origin">Inghilterra · 40%</div>
-        <p class="description">Premium gin "intensely smooth" caratterizzato da botaniche insolite: more, mirtilli, ginepro bulgaro, coriandolo, scorza di arancia di Valencia e radice di angelica. Profilo fruttato, morbido e leggermente dolce, unico nel suo genere.</p>
-      </div>
-    </article>
 
-    <article class="item" data-img="immagini/gin/j_rose">
+    <article class="item" data-img="immagini/gin/j_rose" data-category="agrumato">
       <div class="image"><img alt="J. Rose Gin"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>J. Rose</h3>
@@ -699,25 +88,48 @@
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/monkey_47">
-      <div class="image"><img alt="Monkey 47 Schwarzwald Dry Gin"><div class="placeholder">Immagine</div></div>
+
+    <article class="item" data-img="immagini/gin/malfy" data-category="agrumato">
+      <div class="image"><img alt="Malfy Gin Originale"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Monkey 47</h3>
-        <div class="origin">Germania · Foresta Nera · 47%</div>
-        <p class="description">Schwarzwald Dry Gin culto, prodotto con ben 47 botaniche, molte raccolte nella Foresta Nera, tra cui ginepro, mirtilli rossi, prugnolo, fiori di sambuco, lavanda e pino mugo. Acqua di sorgente locale. Complesso, sfaccettato e leggendario.</p>
+        <h3>Malfy Originale</h3>
+        <div class="origin">Italia · 41%</div>
+        <p class="description">Italian Gin della distilleria Torino Distillati, prodotto a Moncalieri. Sei botaniche con un'enfasi mediterranea: ginepro italiano, coriandolo, angelica, iris, cassia e scorze di limone della Costiera Amalfitana. Pulito, agrumato e versatile.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/koval">
-      <div class="image"><img alt="Koval Dry Gin"><div class="placeholder">Immagine</div></div>
+
+    <article class="item" data-img="immagini/gin/malfy_limone" data-category="agrumato">
+      <div class="image"><img alt="Malfy con Limone"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Koval</h3>
-        <div class="origin">Stati Uniti · 47%</div>
-        <p class="description">Craft gin di Chicago prodotto da grano biologico. Distillazione "heart cut" che preserva solo il cuore del distillato. Botaniche di ginepro, coriandolo, semi di anice, semi di cardamomo e altre erbe. Profilo pulito, leggermente speziato e biologico.</p>
+        <h3>Malfy con Limone</h3>
+        <div class="origin">Italia · 41%</div>
+        <p class="description">Espressione di Malfy con limoni Sfusato della Costiera Amalfitana, raccolti a mano. Profumo intenso e fresco di scorza di limone, ginepro e coriandolo. Vivace, solare, mediterraneo nel cuore.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/tassoni">
+
+    <article class="item" data-img="immagini/gin/malfy_pompelmo" data-category="agrumato">
+      <div class="image"><img alt="Malfy con Pompelmo"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Malfy con Pompelmo</h3>
+        <div class="origin">Italia · 41%</div>
+        <p class="description">Versione di Malfy con pompelmo rosa siciliano in primo piano. Profilo agrumato vivace e leggermente amaricante, bilanciato dal ginepro toscano. Perfetto per Gin Tonic estivi e cocktail freschi.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/portofino" data-category="floreale">
+      <div class="image"><img alt="Portofino Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Portofino Dry Gin</h3>
+        <div class="origin">Italia · Liguria · 43%</div>
+        <p class="description">Gin ispirato alle estati mediterranee della Riviera Ligure. Botaniche fresche coltivate localmente: ginepro, scorze di limone e mandarino, lavanda, rosmarino, menta, salvia, maggiorana e fiori di camomilla. Elegante, floreale e marcatamente mediterraneo.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/tassoni" data-category="agrumato">
       <div class="image"><img alt="Tassoni Gin Superfine al Cedro"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>Tassoni Cedro</h3>
@@ -726,16 +138,48 @@
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/silent_pool">
-      <div class="image"><img alt="Silent Pool Gin"><div class="placeholder">Immagine</div></div>
+
+    <article class="item" data-img="immagini/gin/theresianer" data-category="speziato">
+      <div class="image"><img alt="Theresianer Gin"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Silent Pool</h3>
-        <div class="origin">Inghilterra · 43%</div>
-        <p class="description">Gin artigianale del Surrey distillato accanto al famoso lago Silent Pool. Ventiquattro botaniche tra cui ginepro, miele locale, camomilla, fiori di sambuco, kaffir lime e lavanda. Profilo floreale ricco e setoso, bottiglia turchese iconica.</p>
+        <h3>Theresianer</h3>
+        <div class="origin">Italia · 40%</div>
+        <p class="description">Gin italiano della storica birreria Theresianer, dove tradizione brassicola incontra distillazione. Connubio originale di luppolo, agrumi (pompelmo, mandarino) e cardamomo, con ginepro distillato separatamente. Profilo speziato, resinoso e fresco.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/macaronesian">
+
+    <article class="item" data-img="immagini/gin/cubical" data-category="secco">
+      <div class="image"><img alt="Cubical Premium Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Cubical</h3>
+        <div class="origin">Spagna · 40%</div>
+        <p class="description">Gin spagnolo della distilleria Williams & Humbert, distillato a Jerez. Riconoscibile per la bottiglia cubica. Botaniche tradizionali con un equilibrio classico tra ginepro, coriandolo e agrumi. Pulito, secco e versatile.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/gin_mg" data-category="secco">
+      <div class="image"><img alt="Gin Mazzetti"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Gin MG</h3>
+        <div class="origin">Spagna · 40%</div>
+        <p class="description">Storico London Dry Gin spagnolo lanciato nel 1940 dalla famiglia Giró Ribot a Vilanova i la Geltrú, vicino a Barcellona. Tra i gin più venduti in Spagna, viene prodotto per doppia distillazione in alambicchi disegnati nel 1942 da Manuel Giró Carlos. Le bacche di ginepro selvatico provengono dalla tenuta di proprietà a Teruel. Profilo elegante e classico con note di ginepro, erba fresca, balsamico e leggero limone.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/gin_mare" data-category="erbaceo">
+      <div class="image"><img alt="Gin Mare"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Gin Mare</h3>
+        <div class="origin">Spagna · 42,7%</div>
+        <p class="description">Mediterranean gin distillato in Catalogna con botaniche tipiche della macchia mediterranea: oliva arbequina, rosmarino, timo, basilico, cardamomo, coriandolo e agrumi. Erbaceo, salino e marcatamente mediterraneo.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/macaronesian" data-category="morbido">
       <div class="image"><img alt="Macaronesian White Gin"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>Macaronesian</h3>
@@ -744,7 +188,278 @@
       </div>
     </article>
 
-    <article class="item" data-img="immagini/gin/amuerte">
+
+    <article class="item" data-img="immagini/gin/nordes" data-category="floreale">
+      <div class="image"><img alt="Nordés Atlantic Galician Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Nordés</h3>
+        <div class="origin">Spagna · Galizia · 40%</div>
+        <p class="description">Atlantic Galician Gin con base di acquavite di uva Albariño. Undici botaniche, di cui sei autoctone della Galizia: salicornia, alga marina, eucalipto, menta, salvia e tè di Hierba Luisa. Floreale, salino e atlantico.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/citadelle" data-category="speziato">
+      <div class="image"><img alt="Citadelle Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Citadelle</h3>
+        <div class="origin">Francia · 44%</div>
+        <p class="description">Storico gin francese della Maison Ferrand, distillato in alambicchi Charentais a fiamma viva. Diciannove botaniche da diciassette Paesi: ginepro, coriandolo, cardamomo, fiori di violetta, anice stellato, fave di tonka e altre. Complesso, floreale e finemente speziato.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/osmoz" data-category="morbido">
+      <div class="image"><img alt="Osmoz Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Osmoz</h3>
+        <div class="origin">Francia · 40%</div>
+        <p class="description">Gin francese firmato Maison Villevert (gli stessi di Citadelle), pensato per la mixology contemporanea. Bilanciato e leggermente floreale, con note agrumate e di ginepro elegante. Profilo morbido e versatile, ideale come base per cocktail.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/apium" data-category="floreale">
+      <div class="image"><img alt="Apium London Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Apium</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">London Dry distillato in Inghilterra con un profilo aromatico distintivo. Botaniche di ginepro, fiori di lavanda, pepe di cubeba, rosmarino, angelica, verbena e coriandolo. Delicato e morbido, con un caratteristico finale floreale di lavanda.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/apium_grapefruit" data-category="agrumato">
+      <div class="image"><img alt="Apium Grapefruit Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Apium Grapefruit</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">Espressione agrumata di Apium, in cui il pompelmo è protagonista accanto a ginepro ed erbe aromatiche. Al naso fresco e vivace, al palato esplosione agrumata bilanciata da delicate note erbacee. Finale secco e rinfrescante.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/bathtub" data-category="morbido">
+      <div class="image"><img alt="Bathtub Gin Ableforth's"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bathtub Gin</h3>
+        <div class="origin">Inghilterra · 43,3%</div>
+        <p class="description">Gin artigianale di Ableforth's prodotto con il metodo della cold compound infusion. Sei botaniche selezionate: ginepro, scorza d'arancia, coriandolo, cassia, cardamomo e chiodi di garofano. Profilo intenso e morbido, dal caratteristico colore paglierino.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/bombay" data-category="secco">
+      <div class="image"><img alt="Bombay Original Dry"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bombay Original Dry</h3>
+        <div class="origin">Inghilterra · 37,5%</div>
+        <p class="description">Classico London Dry Gin distillato con otto botaniche selezionate: ginepro, coriandolo, scorza di limone, liquirizia, angelica, iris, mandorla e cassia. Profilo pulito, secco e tradizionale, perfetto per cocktail classici.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/bombay_sapphire" data-category="morbido">
+      <div class="image"><img alt="Bombay Sapphire"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bombay Sapphire</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">Iconico London Dry dalla bottiglia azzurra, distillato con dieci botaniche tramite il metodo Vapour Infusion: ginepro, coriandolo, scorza di limone, liquirizia, mandorla, iris, angelica, cassia, cubebe e grani del paradiso. Floreale, fresco ed elegante.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/brockmans" data-category="morbido">
+      <div class="image"><img alt="Brockmans Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Brockmans</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">Premium gin "intensely smooth" caratterizzato da botaniche insolite: more, mirtilli, ginepro bulgaro, coriandolo, scorza di arancia di Valencia e radice di angelica. Profilo fruttato, morbido e leggermente dolce, unico nel suo genere.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/bulldog" data-category="morbido">
+      <div class="image"><img alt="Bulldog Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bulldog</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">London Dry Gin contemporaneo a quadrupla distillazione, con dodici botaniche da otto Paesi. Tra le più caratteristiche: occhio di drago (longan), foglie di loto, lavanda, papavero bianco, citronella e mandorla. Morbido, lievemente speziato e versatile.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/dodds" data-category="secco">
+      <div class="image"><img alt="Dodd's Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Dodd's</h3>
+        <div class="origin">Inghilterra · 49,9%</div>
+        <p class="description">Gin biologico della London Distillery Company, prodotto in piccoli batch a Battersea. Otto botaniche organiche: ginepro, angelica, scorza fresca di lime, cardamomo verde e nero, alloro, foglie di lampone e miele della London Honey Company. Strutturato e raffinato.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/fifty_pounds" data-category="secco">
+      <div class="image"><img alt="Fifty Pounds Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Fifty Pounds</h3>
+        <div class="origin">Inghilterra · 43,5%</div>
+        <p class="description">London Dry Gin ispirato al 1736, anno della famosa tassa sui distillati di 50 sterline. Undici botaniche distillate in piccoli batch e affinate per tre settimane prima dell'imbottigliamento. Equilibrato, classico, dal profilo morbido e raffinato.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/martin_millers" data-category="morbido">
+      <div class="image"><img alt="Martin Miller's Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Martin Miller's</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">London Dry distillato in Inghilterra ma tagliato con acqua glaciale islandese, considerata tra le più pure al mondo. Dieci botaniche tra cui ginepro toscano, coriandolo, cassia, scorza di agrumi e cetriolo. Pulito, morbido ed equilibrato.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/opihr" data-category="speziato">
+      <div class="image"><img alt="Opihr Oriental Spiced Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Opihr</h3>
+        <div class="origin">Inghilterra · 40%</div>
+        <p class="description">Oriental Spiced Gin ispirato alle antiche vie delle spezie. Botaniche provenienti da tutto il mondo: pepe nero di Tellicherry, cumino indiano, cardamomo, coriandolo marocchino, semi di pompelmo e zenzero. Speziato, esotico e avvolgente.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/plymouth" data-category="secco">
+      <div class="image"><img alt="Plymouth Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Plymouth</h3>
+        <div class="origin">Inghilterra · 41,2%</div>
+        <p class="description">Storico gin inglese prodotto dal 1793 nella Black Friars Distillery di Plymouth. Sette botaniche, tra cui radice di iris, angelica, coriandolo e cardamomo verde. Stile leggermente più morbido e terroso del London Dry, con corpo pieno e finale rotondo.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/portobello_road" data-category="secco">
+      <div class="image"><img alt="Portobello Road Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Portobello Road</h3>
+        <div class="origin">Inghilterra · 42%</div>
+        <p class="description">London Dry Gin distillato a Notting Hill, nel cuore di Londra. Nove botaniche classiche: ginepro, scorze di limone e arancia amara, coriandolo, angelica, iris, liquirizia, noce moscata e cassia. Equilibrato, leggero e dal carattere britannico autentico.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/silent_pool" data-category="floreale">
+      <div class="image"><img alt="Silent Pool Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Silent Pool</h3>
+        <div class="origin">Inghilterra · 43%</div>
+        <p class="description">Gin artigianale del Surrey distillato accanto al famoso lago Silent Pool. Ventiquattro botaniche tra cui ginepro, miele locale, camomilla, fiori di sambuco, kaffir lime e lavanda. Profilo floreale ricco e setoso, bottiglia turchese iconica.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/london_n_1" data-category="morbido">
+      <div class="image"><img alt="The London N° 1 Original Blue Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>The London N° 1</h3>
+        <div class="origin">Inghilterra · 47%</div>
+        <p class="description">Original Blue Gin dal caratteristico colore turchese, ottenuto naturalmente dall'infusione di gardenia. Dodici botaniche tra cui ginepro, coriandolo, angelica, liquirizia, scorza di agrumi, mandorla, cassia e iris. Elegante, complesso e leggermente dolce.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/hendricks" data-category="floreale">
+      <div class="image"><img alt="Hendrick's Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Hendrick's</h3>
+        <div class="origin">Scozia · 41,4%</div>
+        <p class="description">Gin scozzese distillato con undici botaniche e arricchito da infusioni post-distillazione di petali di rosa bulgara e cetriolo. Profilo floreale, delicato e inconfondibile, da servire idealmente con una fettina di cetriolo.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/tanqueray" data-category="secco">
+      <div class="image"><img alt="Tanqueray London Dry"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Tanqueray</h3>
+        <div class="origin">Scozia · 43,1%</div>
+        <p class="description">London Dry Gin di riferimento, distillato quattro volte secondo una ricetta del 1830. Solo quattro botaniche: ginepro, coriandolo, angelica e liquirizia. Profilo netto, secco, dominato dal ginepro: il classico tra i classici.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/tanqueray_ten" data-category="agrumato">
+      <div class="image"><img alt="Tanqueray No. Ten"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Tanqueray N° Ten</h3>
+        <div class="origin">Scozia · 47,3%</div>
+        <p class="description">Versione premium di Tanqueray, distillata nel piccolo alambicco "Tiny Ten" con agrumi freschi: pompelmo, lime, arancia e fiori di camomilla. Vivace, agrumato e setoso, considerato uno dei migliori gin per il Martini.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/gunpowder" data-category="speziato">
+      <div class="image"><img alt="Drumshanbo Gunpowder Irish Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Gunpowder</h3>
+        <div class="origin">Irlanda · 43%</div>
+        <p class="description">Drumshanbo Gunpowder Irish Gin distillato lentamente in piccoli alambicchi nella contea di Leitrim. Caratterizzato dal tè verde Gunpowder cinese, unito a coriandolo, cardamomo, agrumi orientali (yuzu, limone Meyer, pompelmo) e bacche di sorbo. Fresco, speziato ed agrumato.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/gunpowder_sardinian" data-category="agrumato">
+      <div class="image"><img alt="Gunpowder Sardinian Citrus"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Gunpowder Sardinian Citrus</h3>
+        <div class="origin">Irlanda · 43%</div>
+        <p class="description">Espressione speciale di Gunpowder con l'aggiunta di agrumi sardi: arancia, limone e pompelmo della Sardegna. Mantiene il cuore di tè Gunpowder e ginepro, con un'esplosione agrumata mediterranea pulita e intensa.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/n_3" data-category="secco">
+      <div class="image"><img alt="N° 3 London Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>N° 3 London Dry</h3>
+        <div class="origin">Paesi Bassi · 46%</div>
+        <p class="description">Distillato in Olanda per la storica casa londinese Berry Bros. & Rudd. Sole sei botaniche di altissima qualità: ginepro, coriandolo, angelica, scorza di arancia, pompelmo e cardamomo. Pulito, deciso, costruito attorno al ginepro: gin da Martini per eccellenza.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/elephant" data-category="erbaceo">
+      <div class="image"><img alt="Elephant Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Elephant</h3>
+        <div class="origin">Germania · 45%</div>
+        <p class="description">Premium gin tedesco con botaniche rare africane: baobab, buchu, devil's claw, lion's tail e mela africana, unite a ginepro e agrumi. Il 15% dei profitti devoluto alla conservazione degli elefanti. Profilo erbaceo, terroso e ricco.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/monkey_47" data-category="speziato">
+      <div class="image"><img alt="Monkey 47 Schwarzwald Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Monkey 47</h3>
+        <div class="origin">Germania · Foresta Nera · 47%</div>
+        <p class="description">Schwarzwald Dry Gin culto, prodotto con ben 47 botaniche, molte raccolte nella Foresta Nera, tra cui ginepro, mirtilli rossi, prugnolo, fiori di sambuco, lavanda e pino mugo. Acqua di sorgente locale. Complesso, sfaccettato e leggendario.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/the_illusionist" data-category="floreale">
+      <div class="image"><img alt="The Illusionist Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>The Illusionist</h3>
+        <div class="origin">Germania · 45%</div>
+        <p class="description">Gin tedesco famoso per il suo straordinario colore blu indaco che cambia tonalità a contatto con la tonica (acidità). Distillato con quattordici botaniche, tra cui ginepro, lavanda, fiori di clitoria ternatea (responsabili del colore), agrumi e spezie.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/amuerte" data-category="speziato">
       <div class="image"><img alt="Amuerte Coca Leaf Gin"><div class="placeholder">Immagine</div></div>
       <div class="content">
         <h3>Amuerte Black</h3>
@@ -753,6 +468,65 @@
       </div>
     </article>
 
+
+    <article class="item" data-img="immagini/gin/brooklyn" data-category="agrumato">
+      <div class="image"><img alt="Brooklyn Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Brooklyn</h3>
+        <div class="origin">Stati Uniti · 40%</div>
+        <p class="description">Craft gin americano prodotto in piccoli lotti con agrumi freschi (non essiccati) pelati a mano. Undici botaniche tra cui ginepro, scorze di limone, lime e arancia, semi di cacao, fiori di lavanda e foglie di menta. Fresco, vibrante e contemporaneo.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/farmers_botanical" data-category="morbido">
+      <div class="image"><img alt="Farmer's Botanical Organic"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Farmer's Botanical</h3>
+        <div class="origin">Stati Uniti · 46,7%</div>
+        <p class="description">Small batch gin biologico certificato USDA, prodotto in Idaho da grano coltivato sostenibilmente. Botaniche organiche di ginepro, fiori di sambuco, citronella, coriandolo e radice di angelica. Floreale, fresco e morbido.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/koval" data-category="speziato">
+      <div class="image"><img alt="Koval Dry Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Koval</h3>
+        <div class="origin">Stati Uniti · 47%</div>
+        <p class="description">Craft gin di Chicago prodotto da grano biologico. Distillazione "heart cut" che preserva solo il cuore del distillato. Botaniche di ginepro, coriandolo, semi di anice, semi di cardamomo e altre erbe. Profilo pulito, leggermente speziato e biologico.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/etsu" data-category="erbaceo">
+      <div class="image"><img alt="Etsu Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Etsu</h3>
+        <div class="origin">Giappone · 43%</div>
+        <p class="description">Distillato a Hokkaido nella distilleria Asahikawa con acqua delle montagne Taisetsu. Botaniche di ginepro, yuzu, scorza d'arancia amara, tè, coriandolo, angelica e liquirizia. Sorso pulito, fresco, dalle eleganti note agrumate e floreali.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/roku" data-category="erbaceo">
+      <div class="image"><img alt="Roku Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Roku</h3>
+        <div class="origin">Giappone · 43%</div>
+        <p class="description">Gin artigianale di Suntory che unisce otto botaniche tradizionali a sei giapponesi: fiore e foglia di sakura, tè sencha e gyokuro, scorza di yuzu e pepe sansho. Profilo floreale, agrumato e armonico, con un finale leggermente piccante.</p>
+      </div>
+    </article>
+
+
+    <article class="item" data-img="immagini/gin/tenjaku" data-category="erbaceo">
+      <div class="image"><img alt="Tenjaku Gin"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Tenjaku</h3>
+        <div class="origin">Giappone · 40%</div>
+        <p class="description">Craft gin prodotto a Fuefuki, ai piedi del monte Fuji. Combina oltre dieci botaniche occidentali con yuzu, pepe sansho, tè verde ed estratto di pesca della regione di Yamanashi. Aromatico, fresco ed equilibrato, ideale in miscelazione.</p>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -1161,75 +935,156 @@
   </div>
 
   <div class="grid">
-    <article class="item" data-img="immagini/grappe/nome_grappa_1">
-      <div class="image"><img alt="Nome Grappa 1"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/lanativa_franciacorta">
+      <div class="image"><img alt="La Nativa Franciacorta 24 Mesi Doppia Barrique"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 1</h3>
-        <div class="origin">Italia / Regione</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>La Nativa Franciacorta 24 Mesi Doppia Barrique</h3>
+        <div class="origin">Lombardia · Franciacorta · 42%</div>
+        <p class="description">Grappa ottenuta dalle vinacce di uve Franciacorta DOCG, affinata 24 mesi in doppia barrique di rovere francese e americano. Profilo morbido e strutturato, con note di vaniglia, legno tostato, frutta secca e un finale lungo e caldo.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_2">
-      <div class="image"><img alt="Nome Grappa 2"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/pisoni_ginepro">
+      <div class="image"><img alt="Pisoni Grappa alle Erbe Ginepro"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 2</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Pisoni Grappa alle Erbe — Ginepro</h3>
+        <div class="origin">Trentino · 42%</div>
+        <p class="description">Grappa trentina della famiglia Pisoni aromatizzata con bacche di ginepro raccolte sulle montagne locali. Fresca e balsamica, con note resinose e aromatiche che richiamano il bosco alpino. Ideale come digestivo o in abbinamento con selvaggina.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_3">
-      <div class="image"><img alt="Nome Grappa 3"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/pisoni_mugo">
+      <div class="image"><img alt="Pisoni Grappa alle Erbe Mugo"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 3</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Pisoni Grappa alle Erbe — Mugo</h3>
+        <div class="origin">Trentino · 42%</div>
+        <p class="description">Grappa aromatizzata con i germogli del pino mugo, tipica delle Alpi trentine. Profumo intenso e selvatico, con note di resina, mentolo e fieno alpino. Un distillato di montagna autentico, dall'identità aromatica inconfondibile.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_4">
-      <div class="image"><img alt="Nome Grappa 4"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/pisoni_genziana">
+      <div class="image"><img alt="Pisoni Grappa alle Erbe Genziana"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 4</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Pisoni Grappa alle Erbe — Genziana</h3>
+        <div class="origin">Trentino · 42%</div>
+        <p class="description">Grappa trentina infusa con radici di genziana, pianta spontanea dei prati alpini d'alta quota. Carattere deciso e amaricante, con note erbacee e terrose tipiche della radice di genziana. Digestivo classico della tradizione alpina.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_5">
-      <div class="image"><img alt="Nome Grappa 5"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/marolo_barolo">
+      <div class="image"><img alt="Marolo Grappa di Barolo"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 5</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Marolo Grappa di Barolo</h3>
+        <div class="origin">Piemonte · Alba · 42%</div>
+        <p class="description">Grappa monovitigno ottenuta dalle vinacce di Nebbiolo del Barolo DOCG, distillata in alambicco discontinuo a bagnomaria dalla distilleria Marolo di Alba. Profilo elegante e complesso con note di rosa, viola, liquirizia, catrame e frutta rossa matura.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_6">
-      <div class="image"><img alt="Nome Grappa 6"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/franceschini_stravecchia_amarone">
+      <div class="image"><img alt="Distilleria Franceschini Stravecchia Amarone"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 6</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Franceschini Stravecchia Amarone</h3>
+        <div class="origin">Veneto · 42%</div>
+        <p class="description">Grappa stravecchia ricavata dalle vinacce di Corvina, Rondinella e Molinara dell'Amarone della Valpolicella. Lunga maturazione in legno che conferisce colore ambrato intenso, aromi di cacao, prugna secca, tabacco e spezie dolci. Finale persistente e vellutato.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_7">
-      <div class="image"><img alt="Nome Grappa 7"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/marzadro_diciotto_lune">
+      <div class="image"><img alt="Marzadro Diciotto Lune"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 7</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Marzadro Diciotto Lune</h3>
+        <div class="origin">Trentino · Nogaredo · 41%</div>
+        <p class="description">Grappa affinata 18 mesi in piccole botti di rovere da parte della distilleria Marzadro, una delle più rinomate del Trentino. Colore paglierino caldo, con aromi di legno dolce, vaniglia e frutta matura. Equilibrata e morbida, espressione raffinata della tradizione trentina.</p>
       </div>
     </article>
 
-    <article class="item" data-img="immagini/grappe/nome_grappa_8">
-      <div class="image"><img alt="Nome Grappa 8"><div class="placeholder">Immagine</div></div>
+    <article class="item" data-img="immagini/grappe/castagner_riserva_3_anni">
+      <div class="image"><img alt="Castagner Riserva 3 Anni"><div class="placeholder">Immagine</div></div>
       <div class="content">
-        <h3>Nome Grappa 8</h3>
-        <div class="origin">Origine</div>
-        <p class="description">Descrizione del distillato.</p>
+        <h3>Castagner Riserva 3 Anni</h3>
+        <div class="origin">Veneto · Treviso · 43%</div>
+        <p class="description">Grappa riserva affinata tre anni in barriques di rovere francese dalla distilleria Castagner di Conegliano. Colore ambrato dorato, bouquet complesso di spezie, miele, albicocca secca e legno pregiato. Struttura piena e finale elegante e persistente.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/poli_cleopatra_amarone">
+      <div class="image"><img alt="Poli Cleopatra Amarone Oro"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Poli Cleopatra Amarone Oro</h3>
+        <div class="origin">Veneto · Schiavon · 40%</div>
+        <p class="description">Grappa monovitigno ottenuta dalle vinacce di Amarone della Valpolicella, distillata dalla storica Distilleria Poli. Parte della linea Cleopatra dedicata ai grandi vitigni italiani. Intensa e avvolgente, con note di ciliegia matura, cioccolato fondente, spezie e un finale lungo e caldo.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/bocchino_gran_moscato">
+      <div class="image"><img alt="Bocchino Gran Moscato"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bocchino Gran Moscato</h3>
+        <div class="origin">Piemonte · Canelli · 45%</div>
+        <p class="description">Grappa monovitigno di Moscato Bianco prodotta dalla storica distilleria Bocchino di Canelli, fondata nel 1898. Distillazione a vapore discontinua che preserva i profumi floreali e fruttati del Moscato: rosa, pesca bianca, albicocca e miele d'acacia. Elegante e aromatica.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/bocchino_tradizionale">
+      <div class="image"><img alt="Bocchino Tradizionale"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bocchino Tradizionale</h3>
+        <div class="origin">Piemonte · Canelli · 42%</div>
+        <p class="description">Grappa bianca classica della distilleria Bocchino, ottenuta da vinacce di uve piemontesi selezionate. Produzione artigianale con alambicchi discontinui a vapore. Profilo pulito e fragrante, con note di frutta fresca, erbe alpine e una caratteristica morbidezza al palato.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/bocchino_tradizionale_barrique">
+      <div class="image"><img alt="Bocchino Tradizionale Barrique"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Bocchino Tradizionale Barrique</h3>
+        <div class="origin">Piemonte · Canelli · 42%</div>
+        <p class="description">La grappa tradizionale Bocchino affinata in piccole botti di rovere (barrique). L'invecchiamento in legno aggiunge complessità e rotondità alla base fruttata e pulita della Tradizionale: note di vaniglia, burro, caramello e spezie dolci si fondono armoniosamente con il carattere piemontese.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/nardini_grand_riserva">
+      <div class="image"><img alt="Nardini Grand Riserva 3 Anni"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Nardini Grand Riserva 3 Anni</h3>
+        <div class="origin">Veneto · Bassano del Grappa · 50%</div>
+        <p class="description">Grappa invecchiata tre anni in botti di rovere slavone dalla distilleria Nardini, la più antica d'Italia (1779), con sede storica al Ponte degli Alpini di Bassano del Grappa. Ambrata e strutturata, con aromi di tabacco, legno antico, frutta candita e un finale lungo e speziato.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/nardini_bianca">
+      <div class="image"><img alt="Nardini Grappa Bianca"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Nardini Grappa Bianca</h3>
+        <div class="origin">Veneto · Bassano del Grappa · 50%</div>
+        <p class="description">La grappa bianca storica della distilleria Nardini, prodotta dal 1779 con le vinacce delle colline del Grappa. Distillata in alambicchi discontinui e non affinata in legno, esprime in modo diretto il carattere delle vinacce venete: note floreali, fruttate e di erbe fresche.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/franciacorta_la_corte_chardonnay">
+      <div class="image"><img alt="Distillerie Franciacorta La Corte Chardonnay"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Distillerie Franciacorta "La Corte" Chardonnay</h3>
+        <div class="origin">Lombardia · Franciacorta · 42%</div>
+        <p class="description">Grappa monovitigno di Chardonnay ottenuta dalle vinacce della Franciacorta DOCG. Distillazione artigianale che valorizza i profumi varietali dello Chardonnay: fiori bianchi, pesca, pera e burro fuso. Elegante e raffinata, con una morbidezza insolita per una grappa bianca.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/nonino">
+      <div class="image"><img alt="Grappa Nonino"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Grappa Nonino</h3>
+        <div class="origin">Friuli · Percoto · 41%</div>
+        <p class="description">Grappa iconica della distilleria Nonino di Percoto, pioniera della grappa monovitigno in Italia. Prodotta con alambicchi discontinui a vapore artigianali e vinacce fresche selezionate. Profilo fragrante e pulito con note di fiori, frutta fresca e una pulizia distillativa esemplare.</p>
+      </div>
+    </article>
+
+    <article class="item" data-img="immagini/grappe/nonino_chianti_fiaschetta">
+      <div class="image"><img alt="Grappa di Chianti in Fiaschetta"><div class="placeholder">Immagine</div></div>
+      <div class="content">
+        <h3>Grappa di Chianti in Fiaschetta</h3>
+        <div class="origin">Toscana · 42%</div>
+        <p class="description">Grappa ottenuta dalle vinacce di Sangiovese del Chianti DOCG, presentata nella caratteristica fiaschetta toscana rivestita di paglia. Distillato che porta in sé l'anima della Toscana: note di ciliegia, viola, tabacco e cuoio tipiche del Sangiovese, con un finale asciutto e persistente.</p>
       </div>
     </article>
   </div>
@@ -1237,35 +1092,20 @@
 
 <footer>
   <div class="mark">Bar Museo</div>
+  <div class="social">
+    <a href="https://www.instagram.com/barmuseo_crema_/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/bar.museo.crema/" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+  </div>
   <div>Bevi responsabilmente</div>
 </footer>
 
-<!-- AUTO-RILEVAMENTO ESTENSIONI IMMAGINI -->
-<script>
-  // Per ogni card cerca il file immagine provando varie estensioni.
-  // Carica la prima estensione che esiste; altrimenti lascia il placeholder.
-  const ESTENSIONI = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'JPG', 'JPEG', 'PNG', 'WEBP'];
+<button class="back-to-top" id="backToTop" aria-label="Torna su">&#8593;</button>
 
-  document.querySelectorAll('.item[data-img]').forEach(card => {
-    const basePath = card.dataset.img;
-    const img = card.querySelector('.image img');
-    if (!img || !basePath) return;
-
-    let i = 0;
-    function prova() {
-      if (i >= ESTENSIONI.length) return;
-      const ext = ESTENSIONI[i++];
-      const test = new Image();
-      test.onload = () => {
-        img.src = `${basePath}.${ext}`;
-        img.classList.add('loaded');
-      };
-      test.onerror = prova;
-      test.src = `${basePath}.${ext}`;
-    }
-    prova();
-  });
-</script>
+<script src="js/script.js" defer></script>
 
 </body>
 </html>
