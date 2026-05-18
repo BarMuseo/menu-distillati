@@ -1,24 +1,10 @@
-// Auto-rilevamento estensioni immagini (senza errori in console)
-const ESTENSIONI = ['jpg', 'jpeg', 'png', 'webp', 'avif', 'JPG', 'JPEG', 'PNG', 'WEBP'];
-
+// Caricamento immagini
 document.querySelectorAll('.item[data-img]').forEach(card => {
-  const basePath = card.dataset.img;
+  const src = card.dataset.img;
   const img = card.querySelector('.image img');
-  if (!img || !basePath) return;
-
-  (async () => {
-    for (const ext of ESTENSIONI) {
-      const url = `${basePath}.${ext}`;
-      try {
-        const res = await fetch(url, { method: 'HEAD' });
-        if (res.ok) {
-          img.src = url;
-          img.classList.add('loaded');
-          return;
-        }
-      } catch {}
-    }
-  })();
+  if (!img || !src) return;
+  img.onload = () => img.classList.add('loaded');
+  img.src = src;
 });
 
 // Animazioni on scroll (IntersectionObserver)
@@ -45,7 +31,6 @@ const filterBar = document.getElementById('gin-filters');
 if (filterBar) {
   const grid = document.getElementById('gin-grid');
   const items = grid.querySelectorAll('.item[data-category]');
-  const buttons = filterBar.querySelectorAll('button[data-filter]');
 
   filterBar.addEventListener('click', e => {
     const btn = e.target.closest('button[data-filter]');
