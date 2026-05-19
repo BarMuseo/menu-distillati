@@ -13,13 +13,7 @@ const observer = new IntersectionObserver((entries) => {
     const el = entry.target;
     if (entry.isIntersecting) {
       if (!el.classList.contains('visible')) {
-        if (el.classList.contains('item')) {
-          const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('item') && !c.classList.contains('hidden-by-filter'));
-          const idx = siblings.indexOf(el) % 2;
-          setTimeout(() => el.classList.add('visible'), idx * 80);
-        } else {
-          el.classList.add('visible');
-        }
+        el.classList.add('visible');
       }
     } else {
       el.classList.remove('visible');
